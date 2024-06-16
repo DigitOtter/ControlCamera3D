@@ -1,6 +1,7 @@
 @tool
 @icon("res://addons/control_camera3d/control_camera3d.svg")
 ## Camera node, displays from a point of view towards a pivot point and rotates around this point.
+class_name ControlCamera3D
 extends Camera3D
 
 ## Global position of pivot point
@@ -134,10 +135,11 @@ func _unhandled_input(event: InputEvent) -> void:
 #					0))
 #		pivot_pos = _pivot_transform.origin
 		
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_WHEEL_UP:
+	var mod_pressed: bool = event.ctrl_pressed or event.alt_pressed or event.shift_pressed
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_WHEEL_UP and not mod_pressed:
 		if global_position.distance_to(pivot_pos) > zoom_in:
 			translate_object_local(Vector3.FORWARD * _WHEEL_SENSITIVITY * zoom_speed)
 		
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_WHEEL_DOWN and not mod_pressed:
 		if global_position.distance_to(pivot_pos) < zoom_out:
 			translate_object_local(Vector3.FORWARD * -_WHEEL_SENSITIVITY * zoom_speed)
