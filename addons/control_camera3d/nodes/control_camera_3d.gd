@@ -1,6 +1,7 @@
 @tool
 @icon("res://addons/control_camera3d/control_camera3d.svg")
 ## Camera node, displays from a point of view towards a pivot point and rotates around this point.
+class_name ControlCamera3D
 extends Camera3D
 
 ## Global position of pivot point
